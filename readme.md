@@ -45,8 +45,9 @@ Force user to log out:
 ```html
 <script type="text/javascript"> window.location.href = "http://127.0.0.1:8080/logout";</script>
 ```
-Get sessionID with JavaScript:<code>
-<script type="text/javascript">alert(document.cookie);</script></code>
+Get sessionID with JavaScript:
+```html
+<script type="text/javascript">alert(document.cookie);</script>```
 ### A5 Security Misconfiguration ###
 Admin console is still enable for database access and it won't require admin privileges.
 
@@ -77,11 +78,11 @@ http://127.0.0.1:8080/image/ID/delete
 The password change method is vulnerable to CSRF as it uses GET. You can inject the code below to description field and every user that is logged in
 and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF attack, this works from some other site also. 
 (If you're really mean you can change their passwords and then force them to log out.)
-<code><img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/></code>
+```html<img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>```
 1. Browse to http://127.0.0.1:8080
 2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
 3. Choose a random image and add the following line to description field:
-<code><img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/></code>
+```html<img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>```
 4. Press "Add!"
 5. Open a private browsing window and login in to the site with different account.
 6. Browse to index and log out
@@ -99,7 +100,7 @@ Remove lines 44-54 from user.html
 
 ### A3 Cross-Site Scripting (XSS) ###
 Remove all http.header() related stuff from SecurityConfiguration.java lines 24-28.
-Replace th:utextwith <h2 th:text in index.html line 20.
+Replace th:utext with th:text in index.html line 20.
 
 ### A5 Security Misconfiguration ###
 Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
@@ -112,7 +113,7 @@ Remove "/delete" from th:href in user.html line 28
 
 
 ### A8 Cross-Site Request Forgery (CSRF) ### 
-Remove HTML comment tags (<!-- and -->) from user.html line 40.
+Remove HTML comment tags ```html(<!-- and -->```)``` from user.html line 40.
 In file ImageController.java move lines 112 and 113 inside the curly bracket on lines 109 and 111
 
 
