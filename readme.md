@@ -42,9 +42,9 @@ The description field is vulnerable to JavaScript as it parses HTML tags. You ca
 5. Choose the first account logged in and browse to the "Index" page, you should see a text that says "You have been logged out."
 
 Force user to log out:
-<code>
+```html
 <script type="text/javascript"> window.location.href = "http://127.0.0.1:8080/logout";</script>
-</code>
+```
 Get sessionID with JavaScript:<code>
 <script type="text/javascript">alert(document.cookie);</script></code>
 ### A5 Security Misconfiguration ###
