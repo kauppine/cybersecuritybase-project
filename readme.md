@@ -101,30 +101,30 @@ and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF 
 
 ### A2 Broken Authentication and Session Management ###
 Sessions are ended when browser is closed after these fixes and MD5-hash is used for session IDs.
-*Remove lines 41-44 from DefaultController.java lines 
-*Remove http.sessionManagement().sessionFixation().none(); from SecuritConfiguration.java from SecurityConfiguration.java line 30.
-*Remove file application.properties
-*Remove lines 44-54 from user.html
+* Remove lines 41-44 from DefaultController.java lines 
+* Remove http.sessionManagement().sessionFixation().none(); from SecuritConfiguration.java from SecurityConfiguration.java line 30.
+* Remove file application.properties
+* Remove lines 44-54 from user.html
 
 ### A3 Cross-Site Scripting (XSS) ###
 Enable xss protection headers and text escaping.
-*Remove all http.header() related stuff from SecurityConfiguration.java lines 24-28.
-*Replace th:utext with th:text in index.html line 20.
+* Remove all http.header() related stuff from SecurityConfiguration.java lines 24-28.
+* Replace th:utext with th:text in index.html line 20.
 
 ### A5 Security Misconfiguration ###
-*Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
+* Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
 
 ### A7 Missing Function Level Access Control  ###
 Now only user who is logged in and is the owner of the image can remove it.
-*Remove .antMatchers("/images/*/delete").permitAll() from SecurityConfiguration.java line 41.
-*Remove lines 99-104 in ImageController.java
-*Change th:method to DELETE in user.html line 28
-*Remove "/delete" from th:href in user.html line 28
+* Remove .antMatchers("/images/*/delete").permitAll() from SecurityConfiguration.java line 41.
+* Remove lines 99-104 in ImageController.java
+* Change th:method to DELETE in user.html line 28
+* Remove "/delete" from th:href in user.html line 28
 
 
 ### A8 Cross-Site Request Forgery (CSRF) ### 
 User has to provide current password in order to change it. Switch to POST request.
-*Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
-*In file ImageController.java move lines 112 and 113 inside the curly brackets on lines 109 and 111
+* Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
+* In file ImageController.java move lines 112 and 113 inside the curly brackets on lines 109 and 111
 
 
