@@ -1,6 +1,6 @@
 # Super Cool Image Sharing Site - A cyber security project #
 This software was made for the F-Secure cyber security base MOOC.
-As it is intetionally written to be vulnerable, you are running it at your own risk.
+As it is intentionally written to be vulnerable, you are running it at your own risk.
 There also might be other vulnerabilities that are not listed in this document.
 
 ## How to run ##
@@ -19,37 +19,37 @@ All the instructions assume that you have the server running on your own compute
 Username: tiivi, password: taavi and username: tele, password: tappi.
 
 ### A2 Broken Authentication and Session Management ###
-Session IDs are predictable as they're ascending integers starting from 0. E.g third user has JSESSIONID = 2 and fourth user JSESSIONID = 3.
+Session IDs are predictable as they're ascending integers starting from 0. E.g. third user has JSESSIONID = 2 and fourth user JSESSIONID = 3.
 Also session timeouts are set incorrectly, so if you don't press log out you will remain logged in for a year even if you close your browser.
 
 1. Browse to http://127.0.0.1:8080
-2. Click "My account" to log with previously made account or register a new account by clickin "Register" and then log in
+2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
 3. Choose a random image to be uploaded.
 4. Press "Add!"
-5. Close you browser without logging out from the site and wait X minutes/seconds
+5. Close your browser without logging out from the site and wait X minutes/seconds
 6. Open your browser and browse to http://127.0.0.1:8080/user
 7. You should still be logged in (If you have changed your browser settings to remove all cookies on exit this won't work)
 
 
 ### A3 Cross-Site Scripting (XSS) ###
-The description field is vulnerable to javascript as it parses HTML tags. You can take advantage of it with following examples or come up with your own.
+The description field is vulnerable to JavaScript as it parses HTML tags. You can take advantage of it with following examples or come up with your own.
 
 1. Browse to http://127.0.0.1:8080
-2. Click "My account" to log with previously made account or register a new account by clickin "Register" and then log in
-3. Open up a private browsing window and login to the site with different account.
-3. Choose a random image to be uploaded and copy-paste one of the following scripts to description field using the account in the private browsing window .
+2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
+3. Open a private browsing window and login to the site with different account.
+3. Choose a random image to be uploaded and copy-paste one of the following scripts to description field using the account in the private browsing window.
 4. Press "Add!"
 5. Choose the first account logged in and browse to the "Index" page, you should see a text that says "You have been logged out."
 
 Force user to log out:
 <script type="text/javascript"> window.location.href = "http://127.0.0.1:8080/logout";</script>
 
-Get sessionID with javascript:
+Get sessionID with JavaScript:
 <script type="text/javascript">alert(document.cookie);</script>
 
 
 ### A5 Security Misconfiguration ###
-Admin console is still enable for database access and it won't requice admin privileges.
+Admin console is still enable for database access and it won't require admin privileges.
 
 1. http://127.0.0.1:8080/h2-console/
 2. Log in with previously made account
@@ -81,7 +81,7 @@ and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF 
 <img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>
 
 1. Browse to http://127.0.0.1:8080
-2. Click "My account" to log with previously made account or register a new account by clickin "Register" and then log in
+2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
 3. Choose a random image and add the following line to description field:
 <img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>
 4. Press "Add!"
