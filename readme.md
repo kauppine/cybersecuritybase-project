@@ -42,12 +42,11 @@ The description field is vulnerable to JavaScript as it parses HTML tags. You ca
 5. Choose the first account logged in and browse to the "Index" page, you should see a text that says "You have been logged out."
 
 Force user to log out:
+<code>
 <script type="text/javascript"> window.location.href = "http://127.0.0.1:8080/logout";</script>
-
-Get sessionID with JavaScript:
-<script type="text/javascript">alert(document.cookie);</script>
-
-
+</code>
+Get sessionID with JavaScript:<code>
+<script type="text/javascript">alert(document.cookie);</script></code>
 ### A5 Security Misconfiguration ###
 Admin console is still enable for database access and it won't require admin privileges.
 
@@ -78,12 +77,11 @@ http://127.0.0.1:8080/image/ID/delete
 The password change method is vulnerable to CSRF as it uses GET. You can inject the code below to description field and every user that is logged in
 and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF attack, this works from some other site also. 
 (If you're really mean you can change their passwords and then force them to log out.)
-<img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>
-
+<code><img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/></code>
 1. Browse to http://127.0.0.1:8080
 2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
 3. Choose a random image and add the following line to description field:
-<img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/>
+<code><img src="http://127.0.0.1:8080/changepw?newpassword=NEWPASSWORD" alt="PWNED"/></code>
 4. Press "Add!"
 5. Open a private browsing window and login in to the site with different account.
 6. Browse to index and log out
