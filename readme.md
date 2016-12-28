@@ -76,7 +76,7 @@ Just add /delete to image url like shown below. ID is the number image that will
 http://127.0.0.1:8080/image/ID/delete
 
 
-### A8 Cross-Site Request Forgery (CSRF) ### 
+### A8 Cross-Site Request Forgery (CSRF)
 The password change method is vulnerable to CSRF as it uses GET. You can inject the code below to description field and every user that is logged in
 and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF attack, this works from some other site also. 
 (If you're really mean you can change their passwords and then force them to log out.)
@@ -119,7 +119,7 @@ Remove "/delete" from th:href in user.html line 28
 
 
 ### A8 Cross-Site Request Forgery (CSRF) ### 
-Remove HTML comment tags ```html(<!-- and -->)``` from user.html line 40.
+Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
 In file ImageController.java move lines 112 and 113 inside the curly bracket on lines 109 and 111
 
 
