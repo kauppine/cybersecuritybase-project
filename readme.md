@@ -8,7 +8,7 @@ The software itself is a crude image sharing site (aka imgur clone).
 
 ### Option 1 ###
 1. Clone or download the repository 
-2. Open in NetBeans
+2. Open project in NetBeans
 3. Press "Run Project"
 
 ### Option 2 ###
@@ -16,12 +16,12 @@ The software itself is a crude image sharing site (aka imgur clone).
 2. Run SuperCoolIMageSharingSite-1.0.jar
 
 ## Vulnerabilities ##
-All the instructions assume that you have the server running on your own computer in port 8080. The server has to user accounts premade. 
+All the instructions assume that you have the server running on your own computer in port 8080. The server has two user accounts premade: 
 Username: tiivi, password: taavi and username: tele, password: tappi.
 
 ### A2 Broken Authentication and Session Management ###
 Session IDs are predictable as they're ascending integers starting from 0. E.g. third user has JSESSIONID = 2 and fourth user JSESSIONID = 3.
-Also session timeouts are set incorrectly, so if you don't press log out you will remain logged in for a year even if you close your browser.
+Also session timeouts are set incorrectly, so if you don't press log out you will remain logged in for a year even if you close your browser. This is a serious security flaw if user is using a public computer
 
 1. Browse to http://127.0.0.1:8080
 2. Click "My account" to log with previously made account or register a new account by clicking "Register" and then log in
@@ -52,7 +52,7 @@ Get sessionID with JavaScript:
 ```
 
 ### A5 Security Misconfiguration ###
-Admin console is still enable for database access and it won't require admin privileges.
+Admin console is still enabled for database access and it won't require admin privileges.
 
 1. http://127.0.0.1:8080/h2-console/
 2. Log in with previously made account
@@ -78,7 +78,7 @@ http://127.0.0.1:8080/image/ID/delete
 
 
 ### A8 Cross-Site Request Forgery (CSRF)
-The password change method is vulnerable to CSRF as it uses GET. You can inject the code below to description field and every user that is logged in
+The password change method is vulnerable to CSRF as it uses GET and doesn't check where the request originates from- You can inject the code below to description field and every user that is logged in
 and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF attack, this works from some other site also. 
 (If you're really mean you can change their passwords and then force them to log out.)
 ```html
@@ -100,27 +100,31 @@ and browses to "Index" password will be changed to NEWPASSWORD. As it is a CSRF 
 ## How to fix the vulnerabilities ##
 
 ### A2 Broken Authentication and Session Management ###
-Remove lines 41-44 from DefaultController.java lines 
-Remove http.sessionManagement().sessionFixation().none(); from SecuritConfiguration.java from SecurityConfiguration.java line 30.
-Remove file application.properties
-Remove lines 44-54 from user.html
+Sessions are ended when browser is closed after these fixes and MD5-hash is used for session IDs.
+*Remove lines 41-44 from DefaultController.java lines 
+*Remove http.sessionManagement().sessionFixation().none(); from SecuritConfiguration.java from SecurityConfiguration.java line 30.
+*Remove file application.properties
+*Remove lines 44-54 from user.html
 
 ### A3 Cross-Site Scripting (XSS) ###
-Remove all http.header() related stuff from SecurityConfiguration.java lines 24-28.
-Replace th:utext with th:text in index.html line 20.
+Enable xss protection headers and text escaping.
+*Remove all http.header() related stuff from SecurityConfiguration.java lines 24-28.
+*Replace th:utext with th:text in index.html line 20.
 
 ### A5 Security Misconfiguration ###
-Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
+*Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
 
 ### A7 Missing Function Level Access Control  ###
-Remove .antMatchers("/images/*/delete").permitAll() from SecurityConfiguration.java line 41.
-Remove lines 99-104 in ImageController.java
-Change th:method to DELETE in user.html line 28
-Remove "/delete" from th:href in user.html line 28
+Now only user who is logged in and is the owner of the image can remove it.
+*Remove .antMatchers("/images/*/delete").permitAll() from SecurityConfiguration.java line 41.
+*Remove lines 99-104 in ImageController.java
+*Change th:method to DELETE in user.html line 28
+*Remove "/delete" from th:href in user.html line 28
 
 
 ### A8 Cross-Site Request Forgery (CSRF) ### 
-Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
-In file ImageController.java move lines 112 and 113 inside the curly brackets on lines 109 and 111
+User has to provide current password in order to change it. Switch to POST request.
+*Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
+*In file ImageController.java move lines 112 and 113 inside the curly brackets on lines 109 and 111
 
 
