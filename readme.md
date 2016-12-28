@@ -121,6 +121,6 @@ Remove "/delete" from th:href in user.html line 28
 
 ### A8 Cross-Site Request Forgery (CSRF) ### 
 Remove HTML comment tags ```(<!-- and -->)``` from user.html line 40.
-In file ImageController.java move lines 112 and 113 inside the curly bracket on lines 109 and 111
+In file ImageController.java move lines 112 and 113 inside the curly brackets on lines 109 and 111
 
 
