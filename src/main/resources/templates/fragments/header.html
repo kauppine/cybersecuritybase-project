@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Super Cool Image Sharing Site</title>
+    </head>
+    <body>
+        
+        <header th:fragment="header">
+           <h1>Super Cool Image Sharing Site</h1>
+            <ul>
+                <li><a th:href="@{/index}">Index</a></li>
+                <li><a th:href="@{/user}">My account</a></li>
+                <li><a th:href="@{/register}">Register</a></li>
+                 <li><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+           <hr/>
+        </header>
+
+    </body>
+</html>

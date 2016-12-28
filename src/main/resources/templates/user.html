@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>Image manager</title>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+        <h2>Image manager</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Filename</th><th>Size</th><th>Content-Type</th><th>Description</th><th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${images.empty}">
+                    <td colspan="4">No files</td>
+                </tr>
+                <tr th:each="image : ${images}">
+                    <td><a th:href="@{/images/{id}/(id=${image.id})}" th:text="${image.name}">file name</a></td>
+                    <td th:text="${image.contentLength}">Content length</td>
+                    <td th:text="${image.contentType}">Content type</td>
+                    <td th:text="${image.description}">Description</td>
+                    <td><form th:action="@{/images/{id}/delete(id=${image.id})}" th:method="GET"><input type="submit" value="Delete"/></form></td>
+                </tr>
+            </tbody>
+        </table>
+        <form method="POST" th:action="@{/images}" enctype="multipart/form-data">
+            <input type="file" name="image" id="image"/>
+            <input type="text" name="description" id="description"/>
+            <input type="submit" value="Add!"/>
+        </form>
+        <hr/>
+        <h3>Change your password</h3>
+        <form method="GET" th:action="@{/changepw}" enctype="multipart/form-data">
+            <!--<input type="text" value="Old password" name="oldpassword" id="oldpassword"/>-->
+            <input type="text" value="New password" name="newpassword" id="newpassword"/>
+            <input type="submit" value="Change"/>
+        </form>
+       <script type="text/javascript">
+
+            var name = "JSESSIONID";
+            var date = new Date();
+            var maxAge = 31536000;
+            date.setTime(date.getTime() + (maxAge));
+           
+            var tempcookie = document.cookie
+            document.cookie = 'expires='+date.toGMTString()+';';
+
+        </script>
+    </body>
+</html>

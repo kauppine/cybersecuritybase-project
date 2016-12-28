@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>Super Cool Image Sharing Site</title>
+    </head>
+    <body>
+
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+        
+        <p th:if="${images.empty}">
+                    No images :(
+                </p>
+
+        <div th:each="image,iterStat : ${images}">
+            <img src="abc.png" th:attr="src=@{/images/{id}(id=${image.id})},title=${image.name},alt=${image.name}"/>
+            <br/>
+            <h2 th:utext="${image.description}"></h2>
+        </div>
+
+
+    </body>
+</html>
