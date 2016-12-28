@@ -52,7 +52,7 @@ Get sessionID with JavaScript:
 ```
 
 ### A5 Security Misconfiguration ###
-Admin console is still enabled for database access and it won't require admin privileges.
+Admin console is still enabled for database access and it won't require admin privileges. Also the passwords are stored in plaintext.
 
 1. http://127.0.0.1:8080/h2-console/
 2. Log in with previously made account
@@ -112,6 +112,7 @@ Enable xss protection headers and text escaping.
 * Replace th:utext with th:text in index.html line 20.
 
 ### A5 Security Misconfiguration ###
+Remove all access to admin panel.
 * Add "http.authorizeRequests().antMatchers("/h2-console/").denyAll();" to line 33 in SecurityConfiguration.java.
 
 ### A7 Missing Function Level Access Control  ###
