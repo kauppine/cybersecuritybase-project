@@ -3,7 +3,7 @@ This software was made for the F-Secure cyber security base MOOC.
 As it is intentionally written to be vulnerable, you are running it at your own risk.
 There also might be other vulnerabilities that are not listed in this document.
 The software itself is a crude image sharing site (aka imgur clone).
-
+Vulnerabilities were chosen from OWASP's top 10:https://www.owasp.org/index.php/Top_10_2013-Top_10
 ## How to run ##
 
 ### Option 1 ###
