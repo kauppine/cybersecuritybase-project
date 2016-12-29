@@ -56,11 +56,12 @@ Admin console is still enabled for database access and it won't require admin pr
 
 1. http://127.0.0.1:8080/h2-console/
 2. Log in with previously made account
-3. Put "jdbc:h2:mem:testdb" without quotes to JDBC URL field
-4. Username "sa
-5. Leave password field empty
-6. Click "ACCOUNT" on the left side of the page and then click run
-7. You should now see a table with all registered usernames and passwords
+3. You should now see the h2 consoles login page
+4. Put "jdbc:h2:mem:testdb" without quotes to JDBC URL field
+5. Username "sa
+6. Leave password field empty
+7. Click "ACCOUNT" on the left side of the page and then click run
+8. You should now see a table with all registered usernames and passwords
 
 
 ### A7 Missing Function Level Access Control ###
