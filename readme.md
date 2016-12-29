@@ -56,7 +56,7 @@ Admin console is still enabled for database access and it won't require admin pr
 
 1. http://127.0.0.1:8080/h2-console/
 2. Log in with previously made account
-3. Put "jdbc:h2:mem:testdb" without quotes to JDBC URL field
+3. Don't touch the credentials in h2-console login and put "jdbc:h2:mem:testdb" without quotes to JDBC URL field
 4. Press connect
 5. Click "ACCOUNT" on the left side of the page and then click run
 6. You should now see a table with all registered usernames and passwords
@@ -74,7 +74,7 @@ The image deletion method is vulnerable as the server doesn't check if user has 
 7. Hit enter, the page redirects to login page. Browse to index and you should see that the one image is deleted.
 
 Just add /delete to image url like shown below. ID is the number image that will be deleted.
-http://127.0.0.1:8080/image/ID/delete
+http://127.0.0.1:8080/images/ID/delete
 
 
 ### A8 Cross-Site Request Forgery (CSRF)
